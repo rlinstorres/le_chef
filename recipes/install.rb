@@ -16,33 +16,22 @@
 # limitations under the License.
 #
 
-
-
 case node['platform']
-  when 'ubuntu'
+  when 'ubuntu', 'debian'
     apt_repository 'logentries' do
       uri 'http://rep.logentries.com/'
       distribution node['lsb']['codename']
       components ['main']
       keyserver node['le']['pgp_key_server']
-      key 'C43C79AD'
+      key node['le']['key']
       retries 3
     end
-  when 'centos', 'redhat', 'amazon', 'scientific'
+  when 'centos', 'redhat', 'amazon', 'scientific', 'oracle'
     yum_repository 'logentries' do
       description 'Logentries repo'
       baseurl 'http://rep.logentries.com/rh/\$basearch'
       gpgkey 'http://rep.logentries.com/RPM-GPG-KEY-logentries'
       action :create
-      retries 3
-    end
-  when 'debian'
-    apt_repository 'logentries' do
-      uri 'http://rep.logentries.com/'
-      distribution node['lsb']['codename']
-      components ['main']
-      keyserver node['le']['pgp_key_server']
-      key 'C43C79AD'
       retries 3
     end
 end

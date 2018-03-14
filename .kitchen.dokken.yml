@@ -1,0 +1,53 @@
+driver:
+  name: dokken
+  privileged: true # because Docker and SystemD/Upstart
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+  deprecations_as_errors: true
+
+verifier:
+  name: inspec
+
+platforms:
+- name: ubuntu-14.04
+  driver:
+    image: dokken/ubuntu-14.04
+    pid_one_command: /sbin/init
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+
+- name: ubuntu-16.04
+  driver:
+    image: dokken/ubuntu-16.04
+    pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+
+- name: debian-8.1
+  driver:
+    image: dokken/debian-8.1
+    pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+
+- name: centos-6.7
+  driver:
+    image: dokken/centos-6.7
+    pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN /usr/bin/yum update
+
+suites:
+  - name: default
+    run_list:
+      - recipe[logentries_agent::default]
+    verifier:
+      inspec_tests:
+        - test/integration/default
+    attributes:
+      le:
+        pull-server-side-config: false
