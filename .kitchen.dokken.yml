@@ -27,16 +27,16 @@ platforms:
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
 
-- name: debian-8.1
+- name: debian-8
   driver:
-    image: dokken/debian-8.1
+    image: dokken/debian-8
     pid_one_command: /bin/systemd
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
 
-- name: centos-6.7
+- name: centos-6
   driver:
-    image: dokken/centos-6.7
+    image: dokken/centos-6
     pid_one_command: /bin/systemd
     intermediate_instructions:
       - RUN /usr/bin/yum update
@@ -45,6 +45,8 @@ suites:
   - name: default
     run_list:
       - recipe[logentries_agent::default]
+    verifier:
+        - test/integration/default/serverspec
     attributes:
       le:
         pull-server-side-config: false
