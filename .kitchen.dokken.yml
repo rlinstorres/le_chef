@@ -45,9 +45,6 @@ suites:
   - name: default
     run_list:
       - recipe[logentries_agent::default]
-    verifier:
-      inspec_tests:
-        - test/integration/default
     attributes:
       le:
         pull-server-side-config: false
