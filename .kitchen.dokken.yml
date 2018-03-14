@@ -46,7 +46,7 @@ suites:
     run_list:
       - recipe[logentries_agent::default]
     verifier:
-        - test/integration/default/serverspec
+      - test/integration/default/serverspec
     attributes:
       le:
         pull-server-side-config: false
