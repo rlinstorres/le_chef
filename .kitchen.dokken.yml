@@ -37,7 +37,7 @@ platforms:
 - name: centos-6
   driver:
     image: dokken/centos-6
-    pid_one_command: /bin/systemd
+    pid_one_command: /sbin/init
     intermediate_instructions:
       - RUN /usr/bin/yum update
 
@@ -46,6 +46,7 @@ suites:
     run_list:
       - recipe[logentries_agent::default]
     verifier:
+      inspec_tests:
       - test/integration/default/serverspec
     attributes:
       le:
