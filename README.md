@@ -1,3 +1,5 @@
+[![Cookbook Version](https://img.shields.io/cookbook/v/le_chef.svg?style=flat)](https://supermarket.chef.io/cookbooks/logentries_agent) [![Build Status](https://api.travis-ci.org/rlinstorres/le_chef.svg?branch=master)](https://travis-ci.org/rlinstorres/le_chef)
+
 Logentries_agent Chef Cookbook
 ==============
 
